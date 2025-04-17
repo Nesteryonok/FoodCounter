@@ -1,3 +1,3 @@
-﻿namespace FoodCounter.core.Records;
+﻿namespace FoodCounter.Core.Records;
 
 public record Id(Guid Value);

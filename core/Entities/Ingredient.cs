@@ -1,4 +1,4 @@
-﻿namespace FoodCounter.core.Entities;
+﻿namespace FoodCounter.Core.Entities;
 
 public class Ingredient : IFood
 {

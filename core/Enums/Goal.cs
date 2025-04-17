@@ -1,4 +1,4 @@
-﻿namespace FoodCounter.core.Enums;
+﻿namespace FoodCounter.Core.Enums;
 
 public enum Goal
 {

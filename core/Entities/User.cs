@@ -1,4 +1,6 @@
-﻿namespace FoodCounter.core.Entities;
+﻿using System.Diagnostics;
+
+namespace FoodCounter.Core.Entities;
 
 public class User : IEntity
 {
@@ -8,7 +10,7 @@ public class User : IEntity
 
     public double Weight { get; set; }
     public DateTime Birthday { get; set; }
-    public ActivityLvl Activity { get; set;}
+    public Activity Activity { get; set;}
     public Goal Goal { get; set; }
     public Sex Sex { get; set; }
     public virtual ICollection<Report> Reports { get; set; } = [];
