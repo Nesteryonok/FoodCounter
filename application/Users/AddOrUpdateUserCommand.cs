@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-//нужно добавить email???
-
-namespace FoodCounter.Application.Users
+﻿namespace FoodCounter.Application.Users
 {
     public class AddOrUpdateUserCommand(
         IRepository<User> usersRepository
@@ -14,8 +11,7 @@ namespace FoodCounter.Application.Users
             User? potentialUser = null;
             if (isAdding)
             {
-                potentialUser = await usersRepository.GetOneAsync((user) => user.Name == addUserRequest.Name &&
-                                                                           user.Birthday == addUserRequest.Birthday,
+                potentialUser = await usersRepository.GetOneAsync((user) => user.Email == addUserRequest.Email,
                                                                    cancellationToken);
                 if (potentialUser is not null)
                     return new(409, $"User with name {addUserRequest.Name} already exists in the system.");
@@ -30,7 +26,7 @@ namespace FoodCounter.Application.Users
                 potentialUser.Height = addUserRequest.Height;
                 potentialUser.Weight = addUserRequest.Weight;
                 potentialUser.Birthday = addUserRequest.Birthday;
-                potentialUser.Activity = addUserRequest.Activity;
+                potentialUser.ActivityLvl = addUserRequest.Activity;
                 potentialUser.Goal = addUserRequest.Goal;
                 potentialUser.Sex = addUserRequest.Sex;
             }
@@ -41,7 +37,7 @@ namespace FoodCounter.Application.Users
                 Height = addUserRequest.Height,
                 Weight = addUserRequest.Weight,
                 Birthday = addUserRequest.Birthday,
-                Activity = addUserRequest.Activity,
+                ActivityLvl = addUserRequest.Activity,
                 Goal = addUserRequest.Goal,
                 Sex = addUserRequest.Sex
             }, cancellationToken);

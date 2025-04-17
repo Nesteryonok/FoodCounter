@@ -1,14 +1,13 @@
-﻿using System.Diagnostics;
-
-namespace FoodCounter.Core.Requests;
+﻿namespace FoodCounter.Core.Requests;
 
 public record AddOrUpdateUserReqest(
     Guid? Id,
     string Name,
+    string Email,
     double Height,
     double Weight,
     DateTime Birthday,
-    Activity Activity,
+    ActivityLvl Activity,
     Goal Goal,
     Sex Sex
 ) : IRequest;

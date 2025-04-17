@@ -8,6 +8,7 @@ global using FoodCounter.Application.Ingredients;
 global using FoodCounter.Application.Users;
 global using FoodCounter.Application.Reports;
 global using FoodCounter.Application.Interfaces;
+global using FoodCounter.Application.Meals;
 
 
 global using Bogus;

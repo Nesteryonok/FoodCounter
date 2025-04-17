@@ -7,5 +7,5 @@ public class Report : IEntity
     public double Weight { get; set; }
 
     public virtual User User { get; set; }
-    public virtual Meal Meal { get; set; } //???
+    public virtual Meal Meal { get; set; } 
 }

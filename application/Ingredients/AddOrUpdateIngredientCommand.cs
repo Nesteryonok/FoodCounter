@@ -29,7 +29,7 @@ public class AddOrUpdateIngredientCommand(
         ingredient.Carbs = request.Carbs;
 
         await ingredientsRepository.AddOrUpdateAsync(ingredient, cancellationToken);
-        await ingredientsRepository.SaveChangesAsync();
+        await ingredientsRepository.SaveChangesAsync(cancellationToken);
 
         return new(200, "OK");
     }

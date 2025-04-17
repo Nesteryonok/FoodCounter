@@ -27,7 +27,7 @@ public class AddOrUpdateReportCommand(
         report.Date = request.Data;
         report.Weight = request.Weight;
         await reportsRepository.AddOrUpdateAsync(report, cancellationToken);
-        await reportsRepository.SaveChangesAsync();
+        await reportsRepository.SaveChangesAsync(cancellationToken);
 
         return new(200, "OK");
     }
