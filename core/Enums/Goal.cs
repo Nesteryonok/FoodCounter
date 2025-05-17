@@ -4,5 +4,5 @@ public enum Goal
 {
     WeightLoss,
     WeightMaintenance,
-    Musclegein
+    MuscleGain
 }

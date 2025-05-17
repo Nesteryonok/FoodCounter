@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FoodCounter.Сore.Requests;
 
-namespace FoodCounter.Application.Meals
+namespace FoodCounter.Application.Meals;
+
+public class DeleteMealCommand(
+    IRepository<Meal> mealsRepository
+) : ICommand<ByIdRequest, BaseResponse>
 {
-    internal class DeleteMealCommand
+    public async Task<BaseResponse> ExecuteAsync(ByIdRequest request, CancellationToken cancellationToken = default)
     {
+        var meal = await mealsRepository.GetOneAsync(
+            m => m.Id.Value == request.Id,
+            cancellationToken);
+
+        if (meal is null)
+        {
+            return new BaseResponse(404, "Meal not found.");
+        }
+
+        await mealsRepository.RemoveAsync(meal, cancellationToken);
+        await mealsRepository.SaveChangesAsync(cancellationToken);
+
+        return new BaseResponse(200, "OK");
     }
 }
