@@ -1,9 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using FoodCounter.Application.Users;
-using FoodCounter.Core.Entities;
 using FoodCounter.Core.Enums;
 
 namespace FoodCounter.Tests.Application.Users

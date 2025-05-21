@@ -23,7 +23,7 @@
                     return new(404, "No user found!");
 
                 potentialUser.Name = addUserRequest.Name;
-                potentialUser.Email = addUserRequest.Email;  // <--- добавлено
+                potentialUser.Email = addUserRequest.Email; 
                 potentialUser.Height = addUserRequest.Height;
                 potentialUser.Weight = addUserRequest.Weight;
                 potentialUser.Birthday = addUserRequest.Birthday;
@@ -35,7 +35,7 @@
             await usersRepository.AddOrUpdateAsync(potentialUser ?? new User
             {
                 Name = addUserRequest.Name,
-                Email = addUserRequest.Email,   // <--- добавлено
+                Email = addUserRequest.Email,   
                 Height = addUserRequest.Height,
                 Weight = addUserRequest.Weight,
                 Birthday = addUserRequest.Birthday,

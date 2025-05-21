@@ -1,6 +1,4 @@
-﻿using FoodCounter.Core.Entities;
-using FoodCounter.Core.Requests;
-using FoodCounter.Сore.Requests;
+﻿using FoodCounter.Сore.Requests;
 
 namespace FoodCounter.Application.Users;
 

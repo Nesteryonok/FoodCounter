@@ -1,12 +1,5 @@
-﻿using FoodCounter.Core.Entities;
-using FoodCounter.Core.Enums;
-using FoodCounter.Core.Requests;
-using FoodCounter.Application.Users;
+﻿using FoodCounter.Core.Enums;
 using NUnit.Framework;
-using Bogus;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using FoodCounter.Сore.Requests;
 
 namespace FoodCounter.Tests.Application.Users

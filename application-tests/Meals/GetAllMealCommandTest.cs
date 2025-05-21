@@ -1,7 +1,5 @@
 ﻿using NUnit.Framework;
-using Bogus;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace FoodCounter.Tests.Application.Meals
 {
@@ -14,7 +12,7 @@ namespace FoodCounter.Tests.Application.Meals
             var mealGenerator = new Faker<Meal>()
                 .RuleFor(m => m.Id, f => new Id(f.Random.Guid()))
                 .RuleFor(m => m.Name, f => f.Lorem.Word())
-                .RuleFor(m => m.Ingredients, f => new List<MealIngredient>()); // для простоты пустой список
+                .RuleFor(m => m.Ingredients, f => new List<MealIngredient>()); 
 
             var meals = mealGenerator.Generate(10).ToArray();
             var mealsRepository = new FakeRepository<Meal>(meals);
@@ -33,7 +31,7 @@ namespace FoodCounter.Tests.Application.Meals
                 Assert.That(lastMeal, Is.Not.Null);
                 Assert.That(lastMeal!.Name, Is.EqualTo(mealsRepository.Db.Last().Name));
                 Assert.That(lastMeal.Ingredients.Count, Is.EqualTo(mealsRepository.Db.Last().Ingredients.Count));
-                // Если нужно, можно проверить Protein, Fat, Carbs, но их расчёт зависит от ингредиентов
+               
             });
         }
 
