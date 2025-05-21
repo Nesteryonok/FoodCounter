@@ -15,7 +15,7 @@ namespace FoodCounter.Tests.Application.Ingredients
             // Arrange
             FakeRepository<Ingredient> ingredientRepository = new();
             AddOrUpdateIngredientCommand command = new(ingredientRepository);
-            AddOrUpdateIngredientReqest addIngredientRequest = new(null, Name, Protein, Fat, Carbs);
+            AddOrUpdateIngredientRequest addIngredientRequest = new(null, Name, Protein, Fat, Carbs);
 
             // Act
             var response = await command.ExecuteAsync(addIngredientRequest);
@@ -50,7 +50,7 @@ namespace FoodCounter.Tests.Application.Ingredients
                     }
                 ]);
             AddOrUpdateIngredientCommand command = new(ingredientRepository);
-            AddOrUpdateIngredientReqest addIngredientRequest = new(Id, Name, Protein, Fat, Carbs);
+            AddOrUpdateIngredientRequest addIngredientRequest = new(Id, Name, Protein, Fat, Carbs);
 
             // Act
             var response = await command.ExecuteAsync(addIngredientRequest);

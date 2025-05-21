@@ -2,9 +2,9 @@
 
 public class AddOrUpdateIngredientCommand(
     IRepository<Ingredient> ingredientsRepository
-) : ICommand<AddOrUpdateIngredientReqest, BaseResponse>
+) : ICommand<AddOrUpdateIngredientRequest, BaseResponse>
 {
-    public async Task<BaseResponse> ExecuteAsync(AddOrUpdateIngredientReqest request, CancellationToken cancellationToken = default)
+    public async Task<BaseResponse> ExecuteAsync(AddOrUpdateIngredientRequest request, CancellationToken cancellationToken = default)
     {
         bool isAdding = request.Id is null;
         Ingredient? ingredient;

@@ -1,6 +1,6 @@
 ﻿namespace FoodCounter.Core.Requests;
 
-public record AddOrUpdateIngredientReqest(
+public record AddOrUpdateIngredientRequest(
     Guid? Id,
     string Name,
     double Protein,

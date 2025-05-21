@@ -1,8 +1,8 @@
 ﻿namespace FoodCounter.Сore.Requests;
 
-public record AddOrUpdateReportReqest(
+public record AddOrUpdateReportRequest(
     Guid? Id,
-    DateTime Data,
+    DateTime Date,
     double Weight
     ):IRequest;
 

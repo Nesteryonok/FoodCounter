@@ -5,9 +5,9 @@ namespace FoodCounter.Application.Meals;
 public class AddOrUpdateMealCommand(
     IRepository<Meal> mealsRepository,
     IRepository<Ingredient> ingredientsRepository
-) : ICommand<AddOrUpdateMealReqest, BaseResponse>
+) : ICommand<AddOrUpdateMealRequest, BaseResponse>
 {
-    public async Task<BaseResponse> ExecuteAsync(AddOrUpdateMealReqest addMealRequest,
+    public async Task<BaseResponse> ExecuteAsync(AddOrUpdateMealRequest addMealRequest,
                                                  CancellationToken cancellationToken = default)
     {
         Meal? potentialMeal = null;

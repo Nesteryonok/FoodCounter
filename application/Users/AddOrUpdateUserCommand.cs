@@ -5,13 +5,13 @@
     ) : ICommand<AddOrUpdateUserReqest, BaseResponse>
     {
         public async Task<BaseResponse> ExecuteAsync(AddOrUpdateUserReqest addUserRequest,
-                                                     CancellationToken cancellationToken = default)
+                                              CancellationToken cancellationToken = default)
         {
             bool isAdding = addUserRequest.Id is null;
             User? potentialUser = null;
             if (isAdding)
             {
-                potentialUser = await usersRepository.GetOneAsync((user) => user.Email == addUserRequest.Email,
+                potentialUser = await usersRepository.GetOneAsync(user => user.Email == addUserRequest.Email,
                                                                    cancellationToken);
                 if (potentialUser is not null)
                     return new(409, $"User with name {addUserRequest.Name} already exists in the system.");
@@ -23,6 +23,7 @@
                     return new(404, "No user found!");
 
                 potentialUser.Name = addUserRequest.Name;
+                potentialUser.Email = addUserRequest.Email;  // <--- добавлено
                 potentialUser.Height = addUserRequest.Height;
                 potentialUser.Weight = addUserRequest.Weight;
                 potentialUser.Birthday = addUserRequest.Birthday;
@@ -31,9 +32,10 @@
                 potentialUser.Sex = addUserRequest.Sex;
             }
 
-            await usersRepository.AddOrUpdateAsync(potentialUser ?? new()
+            await usersRepository.AddOrUpdateAsync(potentialUser ?? new User
             {
                 Name = addUserRequest.Name,
+                Email = addUserRequest.Email,   // <--- добавлено
                 Height = addUserRequest.Height,
                 Weight = addUserRequest.Weight,
                 Birthday = addUserRequest.Birthday,
@@ -46,3 +48,4 @@
         }
     }
 }
+

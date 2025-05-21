@@ -1,12 +1,12 @@
-﻿using FoodCounter.Core.Entities;
-using FoodCounter.Сore.Requests;
+﻿using FoodCounter.Сore.Requests; 
 
 namespace FoodCounter.Application.Reports;
+
 public class AddOrUpdateReportCommand(
     IRepository<Report> reportsRepository
-   ) : ICommand<AddOrUpdateReportReqest, BaseResponse>
+) : ICommand<AddOrUpdateReportRequest, BaseResponse> 
 {
-    public async Task<BaseResponse> ExecuteAsync(AddOrUpdateReportReqest request, CancellationToken cancellationToken = default)
+    public async Task<BaseResponse> ExecuteAsync(AddOrUpdateReportRequest request, CancellationToken cancellationToken = default)
     {
         bool isAdding = request.Id is null;
         Report? report;
@@ -19,16 +19,16 @@ public class AddOrUpdateReportCommand(
         {
             report = await reportsRepository.GetOneAsync(
                 x => x.Id.Value == request.Id!.Value,
-            cancellationToken);
+                cancellationToken);
 
             if (report is null)
-                return new(404, "Repurt not found.");
+                return new BaseResponse(404, "Report not found.");
         }
-        report.Date = request.Data;
+        report.Date = request.Date; 
         report.Weight = request.Weight;
         await reportsRepository.AddOrUpdateAsync(report, cancellationToken);
         await reportsRepository.SaveChangesAsync(cancellationToken);
 
-        return new(200, "OK");
+        return new BaseResponse(200, "OK");
     }
 }

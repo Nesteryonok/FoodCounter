@@ -1,5 +1,4 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using FoodCounter.Core.Enums;
 
 namespace FoodCounter.Tests.Application.Reports;
@@ -46,7 +45,7 @@ public class GetAllReportCommandTests
             .RuleFor(r => r.Meal, f => mealGenerator.Generate());
 
         var reports = reportGenerator.Generate(5).ToArray();
-        // Связываем отчёты с пользователем
+     
         foreach (var report in reports)
         {
             report.User.Reports.Add(report);
@@ -57,9 +56,8 @@ public class GetAllReportCommandTests
 
         // Act
         var response = await command.ExecuteAsync(new EmptyRequest());
-        var report = response.Reports.LastOrDefault();
+        var lastReport = response.Reports.LastOrDefault(); 
 
-        // Вычисляем ожидаемые значения Protein, Fat, Carbs для последнего блюда
         var lastMeal = reportRepository.Db.Last().Meal;
         var totalWeight = lastMeal.Ingredients.Sum(x => x.Weight);
         var expectedProtein = lastMeal.Ingredients.Sum(x => x.Weight * x.Ingredient.Protein / 100) / totalWeight * 100;
@@ -72,25 +70,25 @@ public class GetAllReportCommandTests
             Assert.That(response.Code, Is.EqualTo(200));
             Assert.That(response.Description, Is.EqualTo("OK"));
             Assert.That(response.Reports.Count(), Is.EqualTo(5));
-            Assert.That(report, Is.Not.Null);
-            Assert.That(report!.Date, Is.EqualTo(reportRepository.Db.Last().Date));
-            Assert.That(report!.Weight, Is.EqualTo(reportRepository.Db.Last().Weight));
-            Assert.That(report!.User, Is.Not.Null);
-            Assert.That(report!.User.Name, Is.EqualTo(reportRepository.Db.Last().User.Name));
-            Assert.That(report!.User.Email, Is.EqualTo(reportRepository.Db.Last().User.Email));
-            Assert.That(report!.User.Height, Is.EqualTo(reportRepository.Db.Last().User.Height));
-            Assert.That(report!.User.Weight, Is.EqualTo(reportRepository.Db.Last().User.Weight));
-            Assert.That(report!.User.Birthday, Is.EqualTo(reportRepository.Db.Last().User.Birthday));
-            Assert.That(report!.User.ActivityLvl, Is.EqualTo(reportRepository.Db.Last().User.ActivityLvl));
-            Assert.That(report!.User.Goal, Is.EqualTo(reportRepository.Db.Last().User.Goal));
-            Assert.That(report!.User.Sex, Is.EqualTo(reportRepository.Db.Last().User.Sex));
-            Assert.That(report!.User.Reports, Has.Count.EqualTo(1)); // У каждого пользователя один отчёт
-            Assert.That(report!.Meal, Is.Not.Null);
-            Assert.That(report!.Meal.Name, Is.EqualTo(reportRepository.Db.Last().Meal.Name));
-            Assert.That(report!.Meal.Protein, Is.EqualTo(expectedProtein).Within(0.001));
-            Assert.That(report!.Meal.Fat, Is.EqualTo(expectedFat).Within(0.001));
-            Assert.That(report!.Meal.Carbs, Is.EqualTo(expectedCarbs).Within(0.001));
-            Assert.That(report!.Meal.Ingredients, Has.Count.EqualTo(3));
+            Assert.That(lastReport, Is.Not.Null); 
+            Assert.That(lastReport!.Date, Is.EqualTo(reportRepository.Db.Last().Date));
+            Assert.That(lastReport!.Weight, Is.EqualTo(reportRepository.Db.Last().Weight));
+            Assert.That(lastReport!.User, Is.Not.Null);
+            Assert.That(lastReport!.User.Name, Is.EqualTo(reportRepository.Db.Last().User.Name));
+            Assert.That(lastReport!.User.Email, Is.EqualTo(reportRepository.Db.Last().User.Email));
+            Assert.That(lastReport!.User.Height, Is.EqualTo(reportRepository.Db.Last().User.Height));
+            Assert.That(lastReport!.User.Weight, Is.EqualTo(reportRepository.Db.Last().User.Weight));
+            Assert.That(lastReport!.User.Birthday, Is.EqualTo(reportRepository.Db.Last().User.Birthday));
+            Assert.That(lastReport!.User.ActivityLvl, Is.EqualTo(reportRepository.Db.Last().User.ActivityLvl));
+            Assert.That(lastReport!.User.Goal, Is.EqualTo(reportRepository.Db.Last().User.Goal));
+            Assert.That(lastReport!.User.Sex, Is.EqualTo(reportRepository.Db.Last().User.Sex));
+            Assert.That(lastReport!.User.Reports, Has.Count.EqualTo(1)); 
+            Assert.That(lastReport!.Meal, Is.Not.Null);
+            Assert.That(lastReport!.Meal.Name, Is.EqualTo(reportRepository.Db.Last().Meal.Name));
+            Assert.That(lastReport!.Meal.Protein, Is.EqualTo(expectedProtein).Within(0.001));
+            Assert.That(lastReport!.Meal.Fat, Is.EqualTo(expectedFat).Within(0.001));
+            Assert.That(lastReport!.Meal.Carbs, Is.EqualTo(expectedCarbs).Within(0.001));
+            Assert.That(lastReport!.Meal.Ingredients, Has.Count.EqualTo(3));
         });
     }
 

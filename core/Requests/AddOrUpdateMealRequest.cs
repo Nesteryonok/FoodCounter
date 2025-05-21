@@ -1,7 +1,7 @@
 ﻿namespace FoodCounter.Сore.Requests;
 
 
-public record AddOrUpdateMealReqest(
+public record AddOrUpdateMealRequest(
     Guid? Id,
     string Name,
     IngredientWeightDTO[] Ingredients
